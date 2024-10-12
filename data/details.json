@@ -1,0 +1,91 @@
+[
+  {
+    "id": "user1",
+    "info": {
+      "firstName": "test",
+      "lastName": "test name",
+      "instagramUsername": "username",
+      "influencerName": "influencer",
+      "influencerNumber": "39839393",
+      "email": "test@gmail.com",
+      "mailingAdress": "no 5",
+      "profileType": "Influencer collective",
+      "ratePerContent": "400",
+      "balance": "300",
+      "balanceStatus": "pending"
+    },
+    "verify": false
+  },
+  {
+    "name": "DDDJJ",
+    "email": "JDJJD",
+    "id": "user2"
+  },
+  {
+    "name": "jdjdj",
+    "email": "nddjd",
+    "id": "user3"
+  },
+  {
+    "name": "jdjdj",
+    "email": "nddjd",
+    "id": "user4"
+  },
+  {
+    "name": "ndnd",
+    "email": "ndnnd",
+    "id": "user5"
+  },
+  {
+    "name": "ndnd",
+    "email": "ndnnd",
+    "id": "user6"
+  },
+  {
+    "name": "dnnd",
+    "email": "jjdjd",
+    "id": "user7"
+  },
+  {
+    "name": "dnnd",
+    "email": "jjdjd",
+    "id": "user8"
+  },
+  {
+    "id": "user9",
+    "info": {
+      "firstName": "mjdj",
+      "lastName": "jdjjd",
+      "instagramUsername": "ndnnd",
+      "influencerName": " jdjd",
+      "influencerNumber": "jjdjdj",
+      "email": "jd@gma.co",
+      "mailingAddress": "ddju@gmail.com",
+      "profileType": "dhdh",
+      "ratePerContent": "9393",
+      "balance": "9393931",
+      "balanceStatus": "djjdjd"
+    },
+    "balance": {
+      "amount": 9393931
+    },
+    "verify": false
+  },
+  {
+    "id": "user10",
+    "info": {
+      "firstName": "tayp",
+      "lastName": "tola",
+      "instagramUsername": "ndjdjn",
+      "influencerName": " njdjdj",
+      "influencerNumber": "383883",
+      "email": "hhhdh@gmai.c",
+      "mailingAddress": "ndjdj@d.dk",
+      "profileType": "jjdjd",
+      "ratePerContent": "39393",
+      "balanceStatus": "nhsjsj",
+      "balance": "98889"
+    },
+    "verify": false
+  }
+]

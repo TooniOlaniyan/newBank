@@ -6,13 +6,10 @@ import Action from "@/components/Action";
 import Payment from "@/components/Payment";
 import Products from "@/components/Products";
 import Welcome from "@/components/Welcome";
-import Nav from "@/components/Nav";
 
 const Page = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(true); // Loader state
-  const [userData, setUserData] = useState(null); // State for user data
-  const [error, setError] = useState(null); // State for error handling
 
   // Check for token in localStorage on page load
   useEffect(() => {
@@ -24,34 +21,13 @@ const Page = () => {
         // If no token, redirect to login page
         router.push("/sign-in");
       } else {
-        // Get userId from localStorage
-        const userId = localStorage.getItem("userId");
-
-        // Fetch user data from the /get-user endpoint
-        fetch(`/api/get-user?userId=${userId}`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to fetch user data");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            setUserData(data); // Set user data
-            localStorage.setItem("userData", JSON.stringify(data)); // Store user data in localStorage
-            setLoading(false); // Stop loading
-          })
-          .catch((error) => {
-            console.error("Error fetching user data:", error);
-            setError(error.message); // Set error message
-            setLoading(false); // Stop loading
-          });
+        setLoading(false); // Stop loading once token is verified
       }
     }, 1000); // Simulate loading delay (1 second)
   }, [router]);
 
   if (loading) {
-    // Display loader while checking token or fetching user data
+    // Display loader while checking token
     return (
       <div className="flex justify-center items-center h-screen">
         {/* Loader SVG or spinner */}
@@ -79,40 +55,33 @@ const Page = () => {
     );
   }
 
-  if (error) {
-    // Handle error case
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-red-500">{error}</p>
-      </div>
-    );
-  }
+  // Dashboard content, displayed only after loading is false
+  const name = {
+    firstName: "Binta",
+    lastName: "Lawn"
+  };
 
-  // Assuming userData is structured similarly to your previous user JSON
-  const { firstName } = userData?.info; // Access user info
   const payment = {
-    title: "Payments",
-    amount: userData?.balance?.amount, // Use amount from fetched user data
+    title: "payments",
+    amount: 40.56
   };
 
   const products = {
-    title: "Application Status",
-    product: ["Super stay matte ink", "Liquid lipstick"], // Example products
+    title: "Application status",
+    product: ["Super stay matte ink", "Liquid lipstick"]
   };
 
   const action = {
-    title: "Action Required",
-    text: "Complete Payroll Verification",
-    status: userData?.verify,
+    title: "action required",
+    text: "Complete Payroll Verification"
   };
 
   return (
     <section className="flex flex-col gap-8">
-      <Welcome name={firstName} />
+      <Welcome name={name} />
       <Payment payment={payment} />
       <Products products={products} />
       <Action action={action} />
-      <Nav />
     </section>
   );
 };
