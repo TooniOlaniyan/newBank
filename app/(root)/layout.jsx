@@ -22,20 +22,20 @@ const Layout = ({ children }) => {
           className="flex flex-col items-center flex-1 justify-center transition-colors duration-300 hover:text-blue-500"
         >
           <IoMdHome size={24} className="transition-colors duration-200" />
-          <p className="font-bold text-xs md:text-base transition-colors duration-200">
+          <p className="font-semibold text-xs md:text-base transition-colors duration-200">
             Home
           </p>
         </button>
 
         <button
-          onClick={() => router.push("/upload")}
+          onClick={() => router.push("/")}
           className="flex flex-col items-center flex-1 justify-center transition-colors duration-300 hover:text-blue-500"
         >
           <IoCloudUploadOutline
             size={24}
             className="transition-colors duration-200"
           />
-          <p className="font-bold text-xs md:text-base transition-colors duration-200">
+          <p className="font-semibold text-xs md:text-base transition-colors duration-200">
             Upload documents
           </p>
         </button>
@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
             size={24}
             className="transition-colors duration-300"
           />
-          <p className="font-bold text-xs md:text-base transition-colors duration-200">
+          <p className="font-semibold text-xs md:text-base transition-colors duration-200">
             Accounts
           </p>
         </button>
@@ -61,7 +61,7 @@ const Layout = ({ children }) => {
             size={24}
             className="transition-colors duration-300"
           />
-          <p className="font-bold text-xs md:text-base transition-colors duration-200">
+          <p className="font-semibold text-xs md:text-base transition-colors duration-200">
             Settings
           </p>
         </button>
@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
           onClick={() => router.push("/contact-us")}
         >
           <IoIosContact size={24} className="transition-colors duration-300" />
-          <p className="font-bold text-xs md:text-base transition-colors duration-200">
+          <p className="font-semibold text-xs md:text-base transition-colors duration-200">
             Contact
           </p>
         </button>

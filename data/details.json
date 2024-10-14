@@ -66,5 +66,22 @@
       "balanceStatus": 900
     },
     "verify": false
+  },
+  {
+    "id": "user13",
+    "info": {
+      "firstName": "Mike2",
+      "lastName": "Mike2",
+      "instagramUsername": "jdssjd",
+      "influencerName": "skdjksd",
+      "influencerNumber": "skdjksjd",
+      "email": "skdksh@gmail.com",
+      "mailingAddress": "sdjsjd",
+      "profileType": "sdjkksdj",
+      "ratePerContent": "sdksdjskd",
+      "balance": "0",
+      "balanceStatus": "0"
+    },
+    "verify": false
   }
 ]
