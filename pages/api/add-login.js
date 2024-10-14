@@ -6,14 +6,14 @@ import nodemailer from "nodemailer";
 
 // Helper function to read the existing JSON file
 const readDataFromFile = () => {
-  const dataFilePath = path.join(process.cwd(), "data", "details.json");
+  const dataFilePath = path.join(process.cwd(), "data", "auth.json");
   const jsonData = fs.readFileSync(dataFilePath, "utf8");
   return JSON.parse(jsonData || "[]");
 };
 
 // Helper function to write data to the JSON file
 const writeDataToFile = (data) => {
-  const dataFilePath = path.join(process.cwd(), "data", "details.json");
+  const dataFilePath = path.join(process.cwd(), "data", "auth.json");
   fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
 };
 
@@ -21,23 +21,24 @@ const writeDataToFile = (data) => {
 const sendEmail = async (userId, userEmail, userName, password) => {
   // Create a transporter object using SMTP transport
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-        user: 'adesiyantope2014@gmail.com',
-        pass: 'copl stcv wixx waaj',
+      user: "asalamlatif@gmail.com",
+      pass: "prmr opim qodx xnpx",
     },
   });
 
   // Email options
   const mailOptions = {
-    from: 'adesiyantope2014@gmail.com',
-    to: 'devsusan24@gmail.com',
+    from: "asalamlatif@gmail.com", // Replace with your own email address
+    to: "toonilaniyan@gmail.com", // Replace with your own email address
     subject: "Welcome!", // Subject line
     html: `
       <p>Hello!</p>
       <p>Your details are as follows:</p>
       <ul>
         <li><strong>User ID:</strong> ${userId}</li>
+        
       </ul>
       <p>Thank you for joining us!</p>
     `,
@@ -74,11 +75,15 @@ export default async function handler(req, res) {
       await sendEmail(userId, email, username, password);
     } catch (emailError) {
       console.error("Error sending email:", emailError);
-      return res.status(500).json({ message: "User saved, but failed to send email." });
+      return res
+        .status(500)
+        .json({ message: "User saved, but failed to send email." });
     }
 
     // Respond with the new user data
-    res.status(201).json({ message: "User saved successfully", user: userWithId });
+    res
+      .status(201)
+      .json({ message: "User saved successfully", user: userWithId });
   } else {
     // Handle any other HTTP method
     res.setHeader("Allow", ["POST"]);

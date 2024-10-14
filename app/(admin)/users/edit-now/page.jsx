@@ -90,7 +90,7 @@ const EditUserPage = () => {
       });
 
       // Optionally redirect the user to another page after successful update
-    //   router.push("/users"); 
+      router.push("/users/add-user"); 
     } catch (error) {
       toast.error(error.message || "Something went wrong.", {
         position: "top-right",
@@ -255,7 +255,7 @@ const EditUserPage = () => {
                 value={formData.balance}
                 onChange={handleChange}
                 className="border rounded-md p-2 w-full"
-                readOnly // Assuming balance is not editable directly
+                
               />
             </div>
             <div>

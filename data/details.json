@@ -17,74 +17,53 @@
     "verify": false
   },
   {
-    "name": "DDDJJ",
-    "email": "JDJJD",
-    "id": "user2"
-  },
-  {
-    "name": "jdjdj",
-    "email": "nddjd",
-    "id": "user3"
-  },
-  {
-    "name": "jdjdj",
-    "email": "nddjd",
-    "id": "user4"
-  },
-  {
-    "name": "ndnd",
-    "email": "ndnnd",
-    "id": "user5"
-  },
-  {
-    "name": "ndnd",
-    "email": "ndnnd",
-    "id": "user6"
-  },
-  {
-    "name": "dnnd",
-    "email": "jjdjd",
-    "id": "user7"
-  },
-  {
-    "name": "dnnd",
-    "email": "jjdjd",
-    "id": "user8"
-  },
-  {
-    "id": "user9",
+    "id": "user4",
     "info": {
-      "firstName": "mjdj",
-      "lastName": "jdjjd",
-      "instagramUsername": "ndnnd",
-      "influencerName": " jdjd",
-      "influencerNumber": "jjdjdj",
-      "email": "jd@gma.co",
-      "mailingAddress": "ddju@gmail.com",
-      "profileType": "dhdh",
-      "ratePerContent": "9393",
-      "balance": "9393931",
-      "balanceStatus": "djjdjd"
+      "firstName": "hdhd",
+      "lastName": "jdjjdjd",
+      "instagramUsername": "mdjj",
+      "influencerName": "jdjdj",
+      "influencerNumber": "93939",
+      "email": "nndnb@f.ci",
+      "mailingAddress": "nndnb@f.ci",
+      "profileType": "hedeh",
+      "ratePerContent": "922",
+      "balance": "992",
+      "balanceStatus": 992
     },
-    "balance": {
-      "amount": 9393931
+    "verify": false
+  },
+  {
+    "id": "user5",
+    "info": {
+      "firstName": "ndndn",
+      "lastName": "jdndn",
+      "instagramUsername": "djdjd",
+      "influencerName": "ndjdn",
+      "influencerNumber": "3939393",
+      "email": "ndndn@g.id",
+      "mailingAddress": "ndndn@g.id",
+      "profileType": "jdjdj",
+      "ratePerContent": "9393",
+      "balance": "0",
+      "balanceStatus": "done"
     },
     "verify": false
   },
   {
     "id": "user10",
     "info": {
-      "firstName": "tayp",
-      "lastName": "tola",
-      "instagramUsername": "ndjdjn",
-      "influencerName": " njdjdj",
-      "influencerNumber": "383883",
-      "email": "hhhdh@gmai.c",
-      "mailingAddress": "ndjdj@d.dk",
-      "profileType": "jjdjd",
-      "ratePerContent": "39393",
-      "balanceStatus": "nhsjsj",
-      "balance": "98889"
+      "firstName": "Urielle",
+      "lastName": "Morin",
+      "instagramUsername": "jecava",
+      "influencerName": "Chandler Lewis",
+      "influencerNumber": "980",
+      "email": "luwu@mailinator.com",
+      "mailingAddress": "Omnis quisquam a aut",
+      "profileType": "Excepturi consequunt",
+      "ratePerContent": "Dignissimos in in du",
+      "balance": "900",
+      "balanceStatus": 900
     },
     "verify": false
   }

@@ -3,9 +3,11 @@ import { IoMdContact } from "react-icons/io";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
 import { BsWallet2 } from "react-icons/bs";
 import { PiSignOutBold } from "react-icons/pi";
+import { useRouter } from "next/navigation";
 
 
-const page = () => {
+const ContactUs = () => {
+  const router = useRouter();
   return (
     <section className="flex flex-col border rounded-lg">
       {/* Title */}
@@ -16,7 +18,7 @@ const page = () => {
 
       <h2 className="text-xl my-2 mt-6 font-semibold">Contact Options</h2>
 
-        <button className="group" onClick={() => router.push("/add-account")}>
+        <button className="group" onClick={() => router.push("/")}>
           <div className="flex justify-between items-center border-b border-t border-gray-300 px-2 py-4 transition duration-300 ease-in-out transform group-hover:bg-gray-100">
             <div className="flex items-center gap-x-6">
               <IoMdContact
@@ -95,4 +97,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ContactUs;

@@ -18,18 +18,16 @@ const Page = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    // Simulate loading delay for UX purposes (optional)
     setTimeout(() => {
       if (!token) {
-        // If no token, redirect to login page
         router.push("/sign-in");
-      } else {
-        // Get userId from localStorage
+      } else {        
         const userId = localStorage.getItem("userId");
 
-        // Fetch user data from the /get-user endpoint
         fetch(`/api/get-user?userId=${userId}`)
           .then((response) => {
+            console.log(response);
+            
             if (!response.ok) {
               throw new Error("Failed to fetch user data");
             }
@@ -87,12 +85,14 @@ const Page = () => {
       </div>
     );
   }
+  console.log(userData);
+  
 
   // Assuming userData is structured similarly to your previous user JSON
   const { firstName } = userData?.info; // Access user info
   const payment = {
     title: "Payments",
-    amount: userData?.balance?.amount, // Use amount from fetched user data
+    amount: userData?.info?.balance, // Use amount from fetched user data
   };
 
   const products = {

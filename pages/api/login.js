@@ -12,6 +12,8 @@ export default async function handler(req, res) {
 
   const { username, password } = req.body;
 
+  console.log(username, password);
+
   try {
     // Check if username and password match in auth.json
     const user = await checkCredentials(username, password);
@@ -24,15 +26,23 @@ export default async function handler(req, res) {
     const secretKey = "my_secret_key"; // Hardcoded secret
 
     // Generate JWT token
-    const token = jwt.sign({ username, userId: user.userId }, secretKey, { expiresIn: "1h" });
+    const token = jwt.sign({ username, userId: user.userId }, secretKey, {
+      expiresIn: "1h"
+    });
 
     // Instead of setting a cookie, return the token in the response
-    return res.status(200).json({ message: "Login successful!", token, userId: user.userId });
+    return res
+      .status(200)
+      .json({ 
+        message: "Login successful!", 
+        token, 
+        userId: user.id
+      });
   } catch (error) {
     console.error("Error:", error.message);
     return res.status(500).json({
       message: "Failed to login",
-      error: error.message,
+      error: error.message
     });
   }
 }
@@ -50,7 +60,7 @@ async function checkCredentials(username, password) {
 
       // Find the user with matching credentials
       const user = authData.find(
-        (user) => user.username === username && user.password === password
+        user => user.username === username && user.password === password
       );
 
       resolve(user); // Return the user object or undefined if not found

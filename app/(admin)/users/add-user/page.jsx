@@ -33,7 +33,7 @@ const Page = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, email }),
+                body: JSON.stringify({ username: name, password: email }),
             });
 
             if (!response.ok) {

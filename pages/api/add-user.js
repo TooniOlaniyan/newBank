@@ -20,6 +20,8 @@ export default function handler(req, res) {
   if (req.method === "POST") {
     // Get the user data from the request body
     const newUser = req.body;
+    console.log(newUser);
+    
 
     // Validate that userId is provided
     if (!newUser.id) {

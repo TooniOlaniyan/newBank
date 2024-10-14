@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     username: "",
     password: ""
@@ -53,6 +55,8 @@ const Login = () => {
       });
 
       const data = await response.json();
+      console.log(data);
+      
 
       if (!response.ok) {
         throw new Error(data.message || "Failed to login");
@@ -70,7 +74,7 @@ const Login = () => {
 
       // Redirect to dashboard after successful login
       setTimeout(() => {
-        window.location.href = "/"; // Replace with your dashboard route
+        router.push("/");
       }, 2000); // Delay to allow notification display
     } catch (error) {
       console.error("Error:", error);
@@ -85,7 +89,7 @@ const Login = () => {
     <div className="flex justify-center items-center h-screen w-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-6 justify-between w-[90%] md:w-[320px]"
+        className="flex flex-col gap-6 justify-between w-[90%] md:w-[320px] bg-white p-8 rounded-md"
       >
         <h2 className="font-bold text-center text-2xl">Influencer Portal</h2>
 
