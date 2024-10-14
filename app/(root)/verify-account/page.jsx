@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const VerifyAccount = () => {
   const router = useRouter();
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -28,4 +28,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default VerifyAccount;
