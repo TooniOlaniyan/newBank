@@ -21,7 +21,7 @@ const nextConfig = {
       },
     ];
   },
-  crossOrigin: true, // Enable CORS for all API routes
+  crossOrigin: "anonymous", // Enable CORS for all API routes
 };
 
 export default nextConfig;
