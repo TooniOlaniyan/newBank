@@ -75,8 +75,11 @@ const EditUserPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: userData.id, info: formData }), // Send updated info object
+        body: JSON.stringify({ userId: userData.id, info: formData }), 
       });
+
+      console.log(JSON.stringify({ userId: userData.id, info: formData }));
+      
 
       if (!response.ok) {
         throw new Error("Failed to update user");
