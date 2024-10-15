@@ -49,6 +49,7 @@ const sendEmail = async (userId, userEmail, userName, password) => {
 };
 
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   if (req.method === "POST") {
     // Get the user data from the request body
     const newUser = req.body;
