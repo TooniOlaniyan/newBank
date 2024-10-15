@@ -1,9 +1,14 @@
 import nodemailer from "nodemailer";
-import fs from "fs";
-import path from "path";
-import jwt from "jsonwebtoken"; // Import JWT
+import { MongoClient } from "mongodb";
+import jwt from "jsonwebtoken"; 
 
-const authFilePath = path.join(process.cwd(), "data", "auth.json");
+// MongoDB connection function
+const connectToDatabase = async () => {
+  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  await client.connect();
+  const db = client.db("Users"); 
+  return { db, client };
+};
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -11,15 +16,12 @@ export default async function handler(req, res) {
   }
 
   const { username, password } = req.body;
-
   console.log(username, password);
+  
 
   try {
-    // Check if username and password match in auth.json
+    // Check if username and password match in the MongoDB "users" collection
     const user = await checkCredentials(username, password);
-
-    console.log(user);
-    
 
     if (!user) {
       return res.status(401).json({ message: "Invalid username or password" });
@@ -29,18 +31,16 @@ export default async function handler(req, res) {
     const secretKey = "my_secret_key"; // Hardcoded secret
 
     // Generate JWT token
-    const token = jwt.sign({ username, userId: user.userId }, secretKey, {
+    const token = jwt.sign({ username, userId: user._id }, secretKey, {
       expiresIn: "1h"
     });
 
     // Instead of setting a cookie, return the token in the response
-    return res
-      .status(200)
-      .json({ 
-        message: "Login successful!", 
-        token, 
-        userId: user.id
-      });
+    return res.status(200).json({
+      message: "Login successful!",
+      token,
+      userId: user._id
+    });
   } catch (error) {
     console.error("Error:", error.message);
     return res.status(500).json({
@@ -50,23 +50,24 @@ export default async function handler(req, res) {
   }
 }
 
-// Function to check if username and password are in auth.json
+// Function to check if username and password exist in MongoDB
 async function checkCredentials(username, password) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(authFilePath, "utf8", (err, data) => {
-      if (err) {
-        console.error("Error reading auth file:", err);
-        return reject(err);
-      }
+  try {
+    // Connect to MongoDB
+    const { db, client } = await connectToDatabase();
 
-      const authData = JSON.parse(data);
+    // Query the "users" collection for matching username and password
+    const user = await db.collection("users").findOne({ username, password });
 
-      // Find the user with matching credentials
-      const user = authData.find(
-        user => user.username === username && user.password === password
-      );
+    console.log(user);
+    
 
-      resolve(user); // Return the user object or undefined if not found
-    });
-  });
+    // Close the MongoDB connection
+    await client.close();
+
+    return user; // Return the user object or null if not found
+  } catch (error) {
+    console.error("Error checking credentials:", error);
+    throw new Error("Failed to check credentials");
+  }
 }

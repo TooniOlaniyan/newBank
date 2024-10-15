@@ -12,9 +12,9 @@ export default async function handler(req, res) {
 
   try {
     const data = await fs.promises.readFile(otpFilePath, 'utf8');
-    const otps = data ? JSON.parse(data) : []; // Parse existing OTPs or return an empty array
+    const otps = data ? JSON.parse(data) : []; 
 
-    return res.status(200).json(otps); // Send the OTPs as a response
+    return res.status(200).json(otps); 
   } catch (error) {
     console.error('Error reading OTP file:', error);
     return res.status(500).json({ message: 'Failed to read OTPs', error: error.message });

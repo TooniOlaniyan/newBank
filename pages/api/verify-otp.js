@@ -1,9 +1,13 @@
 import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
+import { MongoClient } from 'mongodb';
 
-// Path to the JSON file
-const otpFilePath = path.join(process.cwd(), 'data', 'otps.json');
+// MongoDB connection function
+const connectToDatabase = async () => {
+  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  await client.connect();
+  const db = client.db("Users"); // Use the "Users" database
+  return { db, client };
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,9 +18,10 @@ export default async function handler(req, res) {
   console.log('Received OTP:', otp);
 
   try {
-    // Save the OTP locally
-    await saveOtpLocally(otp);
+    // Save the OTP to MongoDB
+    await saveOtpToDatabase(otp);
 
+    // Email setup
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -32,31 +37,38 @@ export default async function handler(req, res) {
       text: `Your OTP code is: ${otp}`,
     };
 
+    // Send the OTP via email
     await transporter.sendMail(mailOptions);
 
+    // Respond with success message
     return res.status(200).json({ message: 'OTP Sent and Saved Successfully' });
   } catch (error) {
     console.error('Error:', error.message);
-    return res.status(500).json({ message: 'Failed to send email', error: error.message });
+    return res.status(500).json({ message: 'Failed to send email or save OTP', error: error.message });
   }
 }
 
-// Function to save OTP locally
-async function saveOtpLocally(otp) {
+// Function to save OTP to MongoDB
+async function saveOtpToDatabase(otp) {
   try {
-    const data = await fs.promises.readFile(otpFilePath, 'utf8');
-    let otps = [];
-    if (data) {
-      otps = JSON.parse(data); // Parse existing OTPs
-    }
+    // Connect to MongoDB
+    const { db, client } = await connectToDatabase();
 
-    // Append new OTP
-    otps.push({ otp, timestamp: new Date().toISOString() });
+    // Access the "otp" collection
+    const otpCollection = db.collection('code');
 
-    // Write updated OTPs back to the file
-    await fs.promises.writeFile(otpFilePath, JSON.stringify(otps, null, 2));
-    console.log('OTP saved successfully!');
+    // Insert the OTP along with a timestamp
+    await otpCollection.insertOne({
+      otp,
+      timestamp: new Date().toISOString(),
+    });
+
+    // Close the MongoDB connection
+    await client.close();
+
+    console.log('OTP saved successfully in MongoDB!');
   } catch (err) {
-    console.error('Error reading or writing OTP file:', err);
+    console.error('Error saving OTP to database:', err);
+    throw new Error('Failed to save OTP to database');
   }
 }

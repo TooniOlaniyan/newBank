@@ -1,22 +1,14 @@
-// /pages/api/update-user.js
+import { MongoClient } from 'mongodb';
 
-import fs from "fs";
-import path from "path";
-
-// Helper function to read the existing JSON file
-const readDataFromFile = () => {
-  const dataFilePath = path.join(process.cwd(), "data", "details.json");
-  const jsonData = fs.readFileSync(dataFilePath, "utf8");
-  return JSON.parse(jsonData || "[]");
+// MongoDB connection function
+const connectToDatabase = async () => {
+  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  await client.connect();
+  const db = client.db("Users"); // Use your actual database name
+  return { db, client };
 };
 
-// Helper function to write data to the JSON file
-const writeDataToFile = (data) => {
-  const dataFilePath = path.join(process.cwd(), "data", "details.json");
-  fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2));
-};
-
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === "POST") {
     // Get the user data and ID from the request body
     const { userId, info } = req.body;
@@ -26,33 +18,34 @@ export default function handler(req, res) {
       return res.status(400).json({ message: "User ID is required." });
     }
 
-    // Read existing users from the JSON file
-    const users = readDataFromFile();
+    try {
+      // Connect to the MongoDB database
+      const { db, client } = await connectToDatabase();
 
-    // Find the user by ID
-    const existingUserIndex = users.findIndex(user => user.id === userId);
-    
-    // Check if the user ID exists
-    if (existingUserIndex === -1) {
-      return res.status(404).json({ message: "User not found." });
+      // Find the user by ID and update their info in the 'userdetails' collection
+      const result = await db.collection('userdetails').findOneAndUpdate(
+        { id: userId }, // Filter by user ID
+        { $set: { info } }, // Update the 'info' field
+        { returnOriginal: true } // Return the updated document
+      );
+
+      // Close the MongoDB connection
+      client.close();
+
+      // Check if the user was found and updated
+      if (!result.value) {
+        return res.status(404).json({ message: "User not found." });
+      }
+
+      // Respond with the updated user data
+      return res.status(200).json({ message: "User updated successfully", user: result.value });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      return res.status(500).json({ message: "Failed to update user", error: error.message });
     }
-
-    // Update the user information by modifying the info object directly
-    users[existingUserIndex].info = {
-      ...users[existingUserIndex].info, // Retain existing info data
-      ...info, // Update with new information from the request
-    };
-
-    console.log(users);
-    
-    // Write the updated users back to the JSON file
-    writeDataToFile(users);
-
-    // Respond with the updated user data
-    res.status(200).json({ message: "User updated successfully", user: users[existingUserIndex] });
   } else {
     // Handle any other HTTP method
     res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
