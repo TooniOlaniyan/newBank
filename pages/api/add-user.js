@@ -19,13 +19,12 @@ const writeDataToFile = (data) => {
 
 export default async function handler(req, res) {
   await NextCors(req, res, async () => {
-
+    
     if (req.method === "POST") {
       // Get the user data from the request body
       const newUser = req.body;
       console.log(newUser);
       
-  
       // Validate that userId is provided
       if (!newUser.id) {
         return res.status(400).json({ message: "User ID is required." });

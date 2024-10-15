@@ -18,6 +18,9 @@ export default async function handler(req, res) {
     // Check if username and password match in auth.json
     const user = await checkCredentials(username, password);
 
+    console.log(user);
+    
+
     if (!user) {
       return res.status(401).json({ message: "Invalid username or password" });
     }

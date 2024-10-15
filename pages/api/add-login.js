@@ -50,7 +50,14 @@ const sendEmail = async (userId, userEmail, userName, password) => {
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  if (req.method === "POST") {
+  console.log(req.method);
+
+  try {
+    // Ensure the request method is POST
+    if (req.method !== "POST") {
+      throw new Error(`Method ${req.method} Not Allowed`);
+    }
+
     // Get the user data from the request body
     const newUser = req.body;
 
@@ -72,22 +79,20 @@ export default async function handler(req, res) {
     const { username = "", password = "" } = bankDetails; // Provide default values for username and password
 
     // Send an email with the user ID, username, and password
-    try {
-      await sendEmail(userId, email, username, password);
-    } catch (emailError) {
-      console.error("Error sending email:", emailError);
-      return res
-        .status(500)
-        .json({ message: "User saved, but failed to send email." });
-    }
+    await sendEmail(userId, email, username, password);
 
     // Respond with the new user data
-    res
-      .status(201)
-      .json({ message: "User saved successfully", user: userWithId });
-  } else {
-    // Handle any other HTTP method
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.status(201).json({ message: "User saved successfully", user: userWithId });
+
+  } catch (error) {
+    // Handle the case when the method is not allowed
+    if (error.message.includes("Method")) {
+      return res.status(405).end(error.message);
+    }
+
+    // If there's an issue sending email, log it and respond with appropriate message
+    console.error("Error:", error);
+    res.status(500).json({ message: "An error occurred", error: error.message });
   }
 }
+
