@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       client.close();
 
       // Check if the user was found and updated
-      if (!result.value) {
+      if (!result) {
         return res.status(404).json({ message: "User not found." });
       }
 
@@ -48,7 +48,6 @@ export default async function handler(req, res) {
     }
   } else {
     // Handle any other HTTP method
-    res.setHeader("Allow", ["POST"]);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
