@@ -29,6 +29,9 @@ export default async function handler(req, res) {
         { returnOriginal: true } // Return the updated document
       );
 
+      console.log(result);
+      
+
       // Close the MongoDB connection
       client.close();
 
@@ -38,7 +41,7 @@ export default async function handler(req, res) {
       }
 
       // Respond with the updated user data
-      return res.status(200).json({ message: "User updated successfully", user: result.value });
+      return res.status(200).json({ message: "User updated successfully", result });
     } catch (error) {
       console.error("Error updating user:", error);
       return res.status(500).json({ message: "Failed to update user", error: error.message });
