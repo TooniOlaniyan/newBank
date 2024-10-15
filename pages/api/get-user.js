@@ -1,31 +1,38 @@
-import fs from 'fs';
-import path from 'path';
+import { MongoClient } from "mongodb";
 
-const detailsFilePath = path.join(process.cwd(), 'data', 'details.json');
+// MongoDB connection function
+const connectToDatabase = async () => {
+  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  await client.connect();
+  const db = client.db("Users"); // Replace with your actual database name
+  return { db, client };
+};
 
 export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
-  }
-
   const { userId } = req.query; // Get userId from query parameters
 
-  try {
-    // Read the details from the JSON file
-    const data = await fs.promises.readFile(detailsFilePath, 'utf8');
-    const users = JSON.parse(data);
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
 
-    // Find the user by userId
-    const user = users.find(user => user.id === userId);
+  try {
+    // Connect to the MongoDB database
+    const { db, client } = await connectToDatabase();
+
+    // Query the userdetails collection for the user by ID
+    const user = await db.collection("userdetails").findOne({ id: userId });
+
+    // Close the MongoDB connection
+    client.close();
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Return the user data
     return res.status(200).json(user);
   } catch (error) {
-    console.error('Error reading users:', error);
-    return res.status(500).json({ message: 'Failed to load user data' });
+    console.error("Error reading users:", error);
+    return res.status(500).json({ message: "Failed to load user data" });
   }
 }
