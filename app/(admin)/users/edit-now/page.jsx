@@ -157,7 +157,7 @@ const EditUserPage = () => {
             </div>
             <div>
               <label className="block mb-2" htmlFor="instagramUsername">
-                Instagram Username
+                Application number
               </label>
               <input
                 type="text"
@@ -183,7 +183,7 @@ const EditUserPage = () => {
             </div>
             <div>
               <label className="block mb-2" htmlFor="influencerNumber">
-                Influencer Number
+                User ID
               </label>
               <input
                 type="text"
@@ -223,7 +223,7 @@ const EditUserPage = () => {
             </div>
             <div>
               <label className="block mb-2" htmlFor="profileType">
-                Profile Type
+                Program Type
               </label>
               <input
                 type="text"
@@ -236,7 +236,7 @@ const EditUserPage = () => {
             </div>
             <div>
               <label className="block mb-2" htmlFor="ratePerContent">
-                Rate Per Content
+                Account status
               </label>
               <input
                 type="text"

@@ -19,7 +19,7 @@ const ProfileSettings = () => {
   return (
     <section className="flex flex-col border rounded-lg">
       {/* Title */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center my-4">
+      <h2 className="ml-4 text-2xl font-bold text-left text-gray-800 mb-6  my-4">
         Profile Settings
       </h2>
 
@@ -35,7 +35,7 @@ const ProfileSettings = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Personal Info
               </h3>
-              <p>Name, instagram, address, email</p>
+              <p>Name, application number, address, email</p>
             </div>
           </div>
           <div>
@@ -59,7 +59,7 @@ const ProfileSettings = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Balance
               </h3>
-              <p>Account balance and rates</p>
+              <p>Account balance and program type</p>
             </div>
           </div>
           <div>

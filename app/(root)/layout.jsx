@@ -7,14 +7,23 @@ import { IoIosContact, IoMdHome } from "react-icons/io";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 
+import Image from "next/image";
+
 const Layout = ({ children }) => {
   const router = useRouter();
 
   return (
     <section className="relative min-h-screen bg-gray-50">
-      {" "}
-      {/* Added background color for contrast */}
-      <section className="mx-4 my-3">{children}</section>
+      {/* Header with Logo */}
+      <header  onClick={() => router.push("/")} className="bg-zinc-800 shadow-md p-4 flex items-center justify-between cursor-pointer">
+        <Image src="/images/logo.jpg" width={80} height={30} alt="Logo" className="h-10" /> 
+      </header>
+
+      {/* Main content */}
+      <section className="mx-4 my-3 flex-1">
+        {children}
+      </section>
+
       {/* Bottom navigation on mobile, sidebar on desktop */}
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-xl z-10 flex items-center justify-between p-2">
         <button

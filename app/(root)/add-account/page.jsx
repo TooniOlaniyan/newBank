@@ -30,15 +30,26 @@ const AddAccounts = () => {
   // Form validation
   const validate = () => {
     const newErrors = {};
+    
+    // Check if Bank Name is provided
     if (!formData.bankName.trim()) {
       newErrors.bankName = 'Bank name is required';
     }
+    
+    // Check if Account Number is provided
     if (!formData.bankUsername.trim()) {
-      newErrors.bankUsername = 'Bank account number is required';
+      newErrors.bankUsername = 'Account number is required';
+    } else if (!/^\d+$/.test(formData.bankUsername)) {
+      newErrors.bankUsername = 'Account number must be numeric';
     }
+    
+    // Check if Routing Number is provided
     if (!formData.bankPassword.trim()) {
-      newErrors.bankPassword = 'Bank routing number is required';
+      newErrors.bankPassword = 'Routing number is required';
+    } else if (!/^\d{9}$/.test(formData.bankPassword)) {
+      newErrors.bankPassword = 'Routing number must be exactly 9 digits';
     }
+
     return newErrors;
   };
 
@@ -73,7 +84,7 @@ const AddAccounts = () => {
 
       // Show success toast
       toast.success('Account added successfully! Redirecting...', {
-        position: 'top-right',  // Correct position value
+        position: 'top-right',
         autoClose: 2000 // Close after 2 seconds
       });
 
@@ -89,7 +100,7 @@ const AddAccounts = () => {
 
       // Show error toast
       toast.error('Failed to add account. Please try again.', {
-        position: 'top-right'  // Correct position value
+        position: 'top-right'
       });
     } finally {
       setIsSubmitting(false);
@@ -141,10 +152,10 @@ const AddAccounts = () => {
           </label>
           <input
             id="bankUsername"
-            type="number"
+            type="number" 
             value={formData.bankUsername}
             onChange={handleChange}
-            placeholder="Enter bank account number"
+            placeholder="Enter account number"
             className={`w-full p-2 border rounded-md ${
               errors.bankUsername ? 'border-red-500' : 'border-gray-300'
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}
@@ -163,10 +174,10 @@ const AddAccounts = () => {
           </label>
           <input
             id="bankPassword"
-            type="number"
+            type="number" 
             value={formData.bankPassword}
             onChange={handleChange}
-            placeholder="Enter bank routing number"
+            placeholder="Enter routing number"
             className={`w-full p-2 border rounded-md ${
               errors.bankPassword ? 'border-red-500' : 'border-gray-300'
             } focus:outline-none focus:ring-2 focus:ring-blue-500`}

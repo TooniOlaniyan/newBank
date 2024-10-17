@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useRouter } from "next/navigation";
 
@@ -7,8 +7,10 @@ const VerifyAccount = () => {
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg text-center">
-        {/* Title */}
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+        <div className="flex justify-center items-center"> 
+          <img width="64" height="64" src="https://img.icons8.com/sf-black-filled/64/link.png" alt="link"/>
+        </div>
+        <h2 className="text-3xl font-semibold text-gray-900 mb-4">
           Verify Bank Account
         </h2>
 
@@ -20,8 +22,11 @@ const VerifyAccount = () => {
         </p>
 
         {/* Call-to-Action */}
-        <button onClick={() => router.push("/verify-now")} className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-200 font-semibold">
-          Verify Bank Now
+        <button
+          onClick={() => router.push("/verify-now")}
+          className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600 transition duration-200 font-semibold"
+        >
+          Verify Now
         </button>
       </div>
     </section>
