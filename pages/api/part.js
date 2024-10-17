@@ -1,4 +1,3 @@
-// pages/api/part.js
 import axios from 'axios';
 
 export default async function handler(req, res) {
@@ -18,7 +17,7 @@ export default async function handler(req, res) {
       `https://www.britpart.com/api/v1/part/getall?token=${token}&page=${page}&code=${code}`
     );
 
-    console.log(response);
+    console.log(` response ${response}`);
     
     res.status(200).json(response.data);
   } catch (error) {
