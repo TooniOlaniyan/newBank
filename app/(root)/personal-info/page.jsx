@@ -35,7 +35,7 @@ const Page = () => {
           <div className="flex items-center gap-x-6">
             <div>
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
-                Instagram Username
+                Application Number
               </h3>
               <p className="text-left">{userData?.info?.instagramUsername || "N/A"}</p>
             </div>
@@ -47,7 +47,7 @@ const Page = () => {
           <div className="flex items-center gap-x-6">
             <div>
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
-                Influencer Number
+                User ID
               </h3>
               <p className="text-left">{userData?.info?.influencerNumber || "N/A"}</p>
             </div>

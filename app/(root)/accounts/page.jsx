@@ -39,19 +39,19 @@ const Page = () => {
   return (
     <section>
       <section className='flex items-center justify-between'>
-        <div>
-          <h1>Welcome,</h1>
-          <h1 className='font-semibold mt-1 capitalize'>{details?.name}</h1>
+        <div className="py-10">
+          <h1 className="text-xl">Welcome,</h1>
+          <h1 className='font-semibold mt-1 capitalize text-2xl'>{details?.name}</h1>
         </div>
 
         <div>
-          <Image
+          {/* <Image
             alt="Profile"
             src="/images/lip.jpg"
             layout='intrinsic'
             width={100}
             height={100}
-          />
+          /> */}
         </div>
       </section>
 

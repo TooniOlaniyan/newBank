@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Maybelline",
-  description: "Maybelline Influencer",
+  title: "Dararelief",
+  description: "Dararelief",
 };
 
 export default function RootLayout({ children }) {

@@ -56,6 +56,7 @@ const Nav = () => {
 
   return (
     <section className="relative bg-gray-50">
+      
       <div className="fixed bottom-0 left-0 right-0 bg-white shadow-xl z-10 flex items-center justify-between p-2">
         <button
           onClick={() => router.push("/")}

@@ -22,14 +22,14 @@ const Products = ({ products }) => {
           </ul>
         </div>
       </div>
-      <div className='rounded-lg'>
+      {/* <div className='rounded-lg'>
         <Image
           src="/images/lip.jpg"
           alt='product'
           width={100}
           height={100}
         />
-      </div>
+      </div> */}
     </section>
   )
 }
