@@ -17,6 +17,9 @@ export default async function handler(req, res) {
     const response = await axios.get(
       `https://www.britpart.com/api/v1/part/getall?token=${token}&page=${page}&code=${code}`
     );
+
+    console.log(response);
+    
     res.status(200).json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching parts' });
