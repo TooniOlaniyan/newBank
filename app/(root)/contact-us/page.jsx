@@ -64,14 +64,13 @@ const ContactUs = () => {
 
               <p className="text-left">
                 <a
-                  href="mailto:mail@influencers.com"
+                  href="mailto:assistance@dararelief.org"
                   className="hover:underline"
                 >
-                  mail@influencers.com
+                  assistance@dararelief.org
                 </a>
               </p>
-
-              
+              <p className="text-left">24 hours, 7 days a week</p>
             </div>
           </div>
           <div>
@@ -95,7 +94,6 @@ const ContactUs = () => {
                 Visit our website to chat with a live agent
               </h3>
               <p className="text-left">10am-5pm PST, 7 days a week.</p>
-      
             </div>
           </div>
           <div>

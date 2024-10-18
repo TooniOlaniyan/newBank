@@ -91,7 +91,7 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="flex flex-col gap-6 justify-between w-[90%] md:w-[320px] bg-white p-8 rounded-md"
       >
-        <h2 className="font-bold text-center text-2xl">Influencer Portal</h2>
+        <h2 className="font-bold text-center text-2xl">Program Portal</h2>
 
         <div className="flex flex-col gap-8">
           <div className="flex flex-col items-start justify-start gap-2">

@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the styles for toast
-import { useRouter } from 'next/navigation'; // For redirection
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -79,6 +80,9 @@ const Page = () => {
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md w-full max-w-md"
       >
+        <div className="flex justify-center items-center mb-4">
+          <Image width="40" height="40" src="/images/link.svg" alt="link" />
+        </div>
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Verify Account
         </h2>

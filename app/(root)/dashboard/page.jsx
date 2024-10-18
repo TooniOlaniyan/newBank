@@ -58,22 +58,22 @@ const Page = () => {
   // Dashboard content, displayed only after loading is false
   const name = {
     firstName: "Binta",
-    lastName: "Lawn"
+    lastName: "Lawn",
   };
 
   const payment = {
     title: "payments",
-    amount: 40.56
+    amount: 40.56,
   };
 
   const products = {
     title: "Application status",
-    product: ["Super stay matte ink", "Liquid lipstick"]
+    product: ["Verify your account", "Complete Payroll Verification"],
   };
 
   const action = {
     title: "action required",
-    text: "Complete Payroll Verification"
+    text: "Complete Payroll Verification",
   };
 
   return (

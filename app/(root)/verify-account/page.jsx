@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
@@ -7,8 +8,8 @@ const VerifyAccount = () => {
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-lg text-center">
-        <div className="flex justify-center items-center"> 
-          <img width="64" height="64" src="https://img.icons8.com/sf-black-filled/64/link.png" alt="link"/>
+        <div className="flex justify-center items-center mb-4">
+          <Image width="40" height="40" src="/images/link.svg" alt="link" />
         </div>
         <h2 className="text-3xl font-semibold text-gray-900 mb-4">
           Verify Bank Account

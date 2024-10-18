@@ -35,7 +35,7 @@ const ProfileSettings = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Personal Info
               </h3>
-              <p>Name, application number, address, email</p>
+              <p >Name, application number, ....</p>
             </div>
           </div>
           <div>

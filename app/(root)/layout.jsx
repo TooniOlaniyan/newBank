@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
     <section className="relative min-h-screen bg-gray-50">
       {/* Header with Logo */}
       <header  onClick={() => router.push("/")} className="bg-zinc-800 shadow-md p-4 flex items-center justify-between cursor-pointer">
-        <Image src="/images/logo.jpg" width={80} height={30} alt="Logo" className="h-10" /> 
+        <Image src="/images/logo.jpg" width={80} height={40} alt="Logo" className="h-10" /> 
       </header>
 
       {/* Main content */}
