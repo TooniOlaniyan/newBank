@@ -59,7 +59,7 @@ const ProfileSettings = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Balance
               </h3>
-              <p>Account balance and program type</p>
+              <p className="w-fit">Account balance and program type</p>
             </div>
           </div>
           <div>
@@ -83,7 +83,7 @@ const ProfileSettings = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Sign Out
               </h3>
-              <p>Securely sign out of your account</p>
+              <p className="w-fit ">Securely sign out of your account</p>
             </div>
           </div>
           <div>
