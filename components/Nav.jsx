@@ -69,7 +69,7 @@ const Nav = () => {
         </button>
 
         <button
-          onClick={() => router.push("/upload")}
+          onClick={() => router.push("/")}
           className="flex flex-col items-center flex-1 justify-center transition-colors duration-300 hover:text-blue-500"
         >
           <IoCloudUploadOutline size={24} className="transition-colors duration-200" />
