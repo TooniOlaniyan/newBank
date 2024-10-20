@@ -66,11 +66,6 @@ const Page = () => {
     amount: 40.56,
   };
 
-  const products = {
-    title: "Application status",
-    product: ["Verify your account", "Complete Payroll Verification"],
-  };
-
   const action = {
     title: "action required",
     text: "Complete Payroll Verification",

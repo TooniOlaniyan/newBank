@@ -21,13 +21,13 @@ const Page = () => {
     setTimeout(() => {
       if (!token) {
         router.push("/sign-in");
-      } else {        
+      } else {
         const userId = localStorage.getItem("userId");
 
         fetch(`/api/get-user?userId=${userId}`)
           .then((response) => {
             console.log(response);
-            
+
             if (!response.ok) {
               throw new Error("Failed to fetch user data");
             }
@@ -86,7 +86,6 @@ const Page = () => {
     );
   }
   console.log(userData);
-  
 
   // Assuming userData is structured similarly to your previous user JSON
   const { firstName } = userData?.info; // Access user info
@@ -97,7 +96,7 @@ const Page = () => {
 
   const products = {
     title: "Application Status",
-    product: ["Super stay matte ink", "Liquid lipstick"], // Example products
+    product: ["Verify your account", "Complete payroll Verification"],
   };
 
   const action = {

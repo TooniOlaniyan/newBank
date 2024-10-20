@@ -1,37 +1,32 @@
-import Image from 'next/image'
+import { useRouter } from "next/navigation";
 
 const Products = ({ products }) => {
+  const router = useRouter();
   return (
-    <section className='flex justify-between drop-shadow bg-slate-100 rounded-lg h-[23vh] md:h-[30vh]'>
-      <div className='py-1 px-2'>
+    <section className="flex justify-between bg-gray-900 text-white drop-shadow-lg rounded-lg md:h-[30vh] p-4">
+      {/* Product List */}
+      <div className="w-full md:w-2/3">
         <div>
-          <h1 className='uppercase font-bold'>{products?.title}</h1>
+          <h1 className="uppercase font-bold">{products?.title}</h1>
         </div>
         <div>
-          <ul className='mt-8'>
+          <ul className="mt-6 flex flex-col md:flex-row md:gap-x-4">
             {products?.product.map((item, index) => {
               return (
-                <li
+                <button
+                  onClick={() => router.push("/verify-account")}
                   key={index}
-                  className='p-2 bg-pink-200 text-gray-800 border border-pink-300 rounded-none text-center hover:bg-pink-400 hover:text-white transition duration-300'
+                  className="p-2 my-2 bg-gray-800 text-white border border-gray-700 rounded-md text-center hover:bg-gray-700 transition duration-300"
                 >
                   <p>{item}</p>
-                </li>
+                </button>
               );
             })}
           </ul>
         </div>
       </div>
-      {/* <div className='rounded-lg'>
-        <Image
-          src="/images/lip.jpg"
-          alt='product'
-          width={100}
-          height={100}
-        />
-      </div> */}
     </section>
-  )
-}
+  );
+};
 
 export default Products;
