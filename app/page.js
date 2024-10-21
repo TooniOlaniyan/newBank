@@ -96,7 +96,7 @@ const Page = () => {
 
   const products = {
     title: "Application Status",
-    product: ["Approved (pending Payment)", "Check Status"],
+    product: ["Approved (Pending Payment)", "Check Status"],
   };
 
   const action = {

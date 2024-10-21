@@ -24,7 +24,7 @@ const Products = ({ products }) => {
               } else {
                 return (
                   <button
-                    onClick={() => router.push("/accounts")}
+                    onClick={() => router.push("/balance")}
                     key={index}
                     className="p-2 my-2 bg-gray-800 text-white border border-gray-700 rounded-md text-center hover:bg-gray-700 transition duration-300"
                   >

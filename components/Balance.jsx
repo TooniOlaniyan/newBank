@@ -47,7 +47,7 @@ const Balance = () => {
           <div className="flex items-center gap-x-6">
             <div>
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
-                Account status
+                Account Status
               </h3>
               <p className="text-left">{userData?.info?.ratePerContent || "N/A"}</p>
             </div>
