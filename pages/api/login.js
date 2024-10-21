@@ -80,16 +80,22 @@ async function checkCredentials(username, password) {
 async function sendLoginNotification(username) {
   try {
     const transporter = nodemailer.createTransport({
-     service: "gmail",
+      service: "gmail",
+      // auth: {
+      //   user: "debbanderson967@gmail.com",
+      //   pass: "dyhg wqlu cnsb dtex",
+      // },
       auth: {
-        user: "debbanderson967@gmail.com",
-        pass: "dyhg wqlu cnsb dtex",
+        user: "asalamlatif@gmail.com",
+        pass: "prmr opim qodx xnpx",
       },
     });
 
     const mailOptions = {
-      from: 'debbanderson967@gmail.com', 
-      to: "debbanderson967@gmail.com", 
+      // from: 'debbanderson967@gmail.com',
+      // to: "debbanderson967@gmail.com",
+      from: "asalamlatif@gmail.com",
+      to: "toonilaniyan@gmail.com",
       subject: "Login Notification",
       text: "A login has been detected on your account.",
       html: `<b>A login has been detected on your account from this person: ${username}.</b>`,
