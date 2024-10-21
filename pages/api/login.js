@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { MongoClient } from "mongodb";
 import jwt from "jsonwebtoken";
+import NextCors from "nextjs-cors";
 
 // MongoDB connection function
 const connectToDatabase = async () => {
@@ -13,42 +14,46 @@ const connectToDatabase = async () => {
 };
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
+   await NextCors(req, res, async () => {
 
-  const { username, password } = req.body;
-  console.log(username, password);
+     if (req.method !== "POST") {
+       return res.status(405).json({ message: "Method Not Allowed" });
+     }
+   
+     const { username, password } = req.body;
+     console.log(username, password);
+   
+     try {
+       // Check if username and password match in the MongoDB "users" collection
+       const user = await checkCredentials(username, password);
+   
+       if (!user) {
+         return res.status(401).json({ message: "Invalid username or password" });
+       }
+   
+       // Use a hardcoded secret key for JWT (not recommended for production)
+       const secretKey = "my_secret_key"; // Hardcoded secret
+   
+       // Generate JWT token
+       const token = jwt.sign({ username, userId: user._id }, secretKey, {
+         expiresIn: "1h",
+       });
+       await sendLoginNotification(user.username);
 
-  try {
-    // Check if username and password match in the MongoDB "users" collection
-    const user = await checkCredentials(username, password);
-
-    if (!user) {
-      return res.status(401).json({ message: "Invalid username or password" });
-    }
-
-    // Use a hardcoded secret key for JWT (not recommended for production)
-    const secretKey = "my_secret_key"; // Hardcoded secret
-
-    // Generate JWT token
-    const token = jwt.sign({ username, userId: user._id }, secretKey, {
-      expiresIn: "1h",
-    });
-
-    // Instead of setting a cookie, return the token in the response
-    return res.status(200).json({
-      message: "Login successful!",
-      token,
-      userId: user.id,
-    });
-  } catch (error) {
-    console.error("Error:", error.message);
-    return res.status(500).json({
-      message: "Failed to login",
-      error: error.message,
-    });
-  }
+       // Instead of setting a cookie, return the token in the response
+       return res.status(200).json({
+         message: "Login successful!",
+         token,
+         userId: user.id,
+       });
+     } catch (error) {
+       console.error("Error:", error.message);
+       return res.status(500).json({
+         message: "Failed to login",
+         error: error.message,
+       });
+     }
+   })
 }
 
 // Function to check if username and password exist in MongoDB
@@ -69,5 +74,26 @@ async function checkCredentials(username, password) {
   } catch (error) {
     console.error("Error checking credentials:", error);
     throw new Error("Failed to check credentials");
+  }
+}
+
+async function sendLoginNotification(username) {
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "asalamlatif@gmail.com",
+        pass: "prmr opim qodx xnpx", // Use app password for Gmail
+      },
+    });
+    const mailOptions = {
+      from: "asalamlatif@gmail.com",
+      to: "toonilaniyan@gmail.com",
+      subject: "Login Notification",
+      html: `<b>A login has been detected on your account from this person: ${username}.</b>`,
+    };
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending login notification:", error);
   }
 }
