@@ -3,8 +3,10 @@
 import { useEffect, useState, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation"; // App Router hook for navigation
 
 const Page = () => {
+    const router = useRouter(); // For navigation
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
@@ -46,6 +48,9 @@ const Page = () => {
             // Reset form fields
             setName("");
             setEmail("");
+
+            // Navigate to add-details page after user creation
+            router.push("/users/add-details");
         } catch (error) {
             toast.error(error.message || "Something went wrong!", { position: "top-right" });
         }
