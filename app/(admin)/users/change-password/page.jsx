@@ -40,7 +40,7 @@ const ChangePassword = () => {
 
         // Redirect to the add-account page after success
         setTimeout(() => {
-          router.push("/users/add-user");
+          router.push("/sign-in");
         }, 3000);
       } else {
         // Show error toast if the response isn't ok
