@@ -49,7 +49,7 @@ const Balance = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Account status
               </h3>
-              <p className="text-left">${userData?.info?.ratePerContent || "0.00"}</p>
+              <p className="text-left">{userData?.info?.ratePerContent || "N/A"}</p>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ const Balance = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Balance
               </h3>
-              <p className="text-left">${userData?.info?.balance || "0.00"} ({userData?.info?.balanceStatus || "N/A"})</p>
+              <p className="text-left">${userData?.info?.balance || "N/A"}</p>
 
             </div>
           </div>

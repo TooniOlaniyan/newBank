@@ -75,11 +75,10 @@ const EditUserPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId: userData.id, info: formData }), 
+        body: JSON.stringify({ userId: userData.id, info: formData }),
       });
 
       console.log(JSON.stringify({ userId: userData.id, info: formData }));
-      
 
       if (!response.ok) {
         throw new Error("Failed to update user");
@@ -93,7 +92,7 @@ const EditUserPage = () => {
       });
 
       // Optionally redirect the user to another page after successful update
-      router.push("/users/add-user"); 
+      router.push("/users/add-user");
     } catch (error) {
       toast.error(error.message || "Something went wrong.", {
         position: "top-right",
@@ -114,8 +113,17 @@ const EditUserPage = () => {
           stroke="currentColor"
           strokeWidth="2"
         >
-          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.5" />
-          <path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M5.343 18.364l-1.414 1.414m12.728-12.728l1.414 1.414M6.636 5.343l1.414-1.414" stroke="currentColor" />
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeOpacity="0.5"
+          />
+          <path
+            d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.071-7.071l-1.414 1.414M5.343 18.364l-1.414 1.414m12.728-12.728l1.414 1.414M6.636 5.343l1.414-1.414"
+            stroke="currentColor"
+          />
         </svg>
       </div>
     );
@@ -258,7 +266,6 @@ const EditUserPage = () => {
                 value={formData.balance}
                 onChange={handleChange}
                 className="border rounded-md p-2 w-full"
-                
               />
             </div>
             <div>
@@ -276,7 +283,9 @@ const EditUserPage = () => {
             </div>
             <button
               type="submit"
-              className={`bg-blue-500 text-white rounded-md p-2 ${submitting ? "opacity-50 cursor-not-allowed" : ""}`}
+              className={`bg-blue-500 text-white rounded-md p-2 ${
+                submitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
               disabled={submitting}
             >
               {submitting ? "Updating..." : "Update User"}

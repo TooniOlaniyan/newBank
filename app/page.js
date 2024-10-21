@@ -96,12 +96,12 @@ const Page = () => {
 
   const products = {
     title: "Application Status",
-    product: ["Verify your account", "Complete payroll Verification"],
+    product: ["Approved (pending Payment)", "Check Status"],
   };
 
   const action = {
     title: "Action Required",
-    text: "Complete Payroll Verification",
+    text: "Complete Payment Verification",
     status: userData?.verify,
   };
 

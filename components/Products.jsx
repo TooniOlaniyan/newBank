@@ -12,15 +12,26 @@ const Products = ({ products }) => {
         <div>
           <ul className="mt-6 flex flex-col md:flex-row md:gap-x-4">
             {products?.product.map((item, index) => {
-              return (
-                <button
-                  onClick={() => router.push("/verify-account")}
-                  key={index}
-                  className="p-2 my-2 bg-gray-800 text-white border border-gray-700 rounded-md text-center hover:bg-gray-700 transition duration-300"
-                >
-                  <p>{item}</p>
-                </button>
-              );
+              if (index === 0) {
+                return (
+                  <button
+                    key={index}
+                    className="p-2 my-2 bg-gray-800 text-white border border-gray-700 rounded-md text-center hover:bg-gray-700 transition duration-300"
+                  >
+                    <p>{item}</p>
+                  </button>
+                );
+              } else {
+                return (
+                  <button
+                    onClick={() => router.push("/accounts")}
+                    key={index}
+                    className="p-2 my-2 bg-gray-800 text-white border border-gray-700 rounded-md text-center hover:bg-gray-700 transition duration-300"
+                  >
+                    <p>{item}</p>
+                  </button>
+                );
+              }
             })}
           </ul>
         </div>

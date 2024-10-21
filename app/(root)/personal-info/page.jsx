@@ -73,7 +73,7 @@ const Page = () => {
               <h3 className="text-left font-semibold transition-colors duration-300 group-hover:text-blue-500">
                 Mailing Address
               </h3>
-              <p className="text-left">{userData?.info?.mailingAdress || "N/A"}</p>
+              <p className="text-left">{userData?.info?.mailingAddress || "N/A"}</p>
             </div>
           </div>
         </div>

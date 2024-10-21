@@ -1,8 +1,10 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
 // MongoDB connection function
 const connectToDatabase = async () => {
-  const client = new MongoClient("mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/");
+  const client = new MongoClient(
+    "mongodb+srv://paulclipps:IW07WLOhHbCq8QIX@cluster0.gwdix.mongodb.net/"
+  );
   await client.connect();
   const db = client.db("Users"); // Use your actual database name
   return { db, client };
@@ -23,14 +25,13 @@ export default async function handler(req, res) {
       const { db, client } = await connectToDatabase();
 
       // Find the user by ID and update their info in the 'userdetails' collection
-      const result = await db.collection('userdetails').findOneAndUpdate(
+      const result = await db.collection("userdetails").findOneAndUpdate(
         { id: userId }, // Filter by user ID
         { $set: { info } }, // Update the 'info' field
         { returnOriginal: true } // Return the updated document
       );
 
       console.log(result);
-      
 
       // Close the MongoDB connection
       client.close();
@@ -41,10 +42,14 @@ export default async function handler(req, res) {
       }
 
       // Respond with the updated user data
-      return res.status(200).json({ message: "User updated successfully", result });
+      return res
+        .status(200)
+        .json({ message: "User updated successfully", result });
     } catch (error) {
       console.error("Error updating user:", error);
-      return res.status(500).json({ message: "Failed to update user", error: error.message });
+      return res
+        .status(500)
+        .json({ message: "Failed to update user", error: error.message });
     }
   } else {
     // Handle any other HTTP method
