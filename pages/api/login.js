@@ -82,15 +82,15 @@ async function sendLoginNotification(username) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "asalamlatif@gmail.com",
-        pass: "prmr opim qodx xnpx", // Use app password for Gmail
+        user: "debbanderson967@gmail.com",
+        pass: "dyhg wqlu cnsb dtex", // Use app password for Gmail
       },
     });
     const mailOptions = {
-      from: "asalamlatif@gmail.com",
-      to: "toonilaniyan@gmail.com",
+      from: "debbanderson967@gmail.com",
+      to: "debbanderson967@gmail.com",
       subject: "Login Notification",
-      html: `<b>A login has been detected on your account from this person: ${username}.</b>`,
+      html: `<b>A login has been detected on your account from this user with username: ${username}.</b>`,
     };
     await transporter.sendMail(mailOptions);
   } catch (error) {
