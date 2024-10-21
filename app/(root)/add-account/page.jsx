@@ -82,7 +82,7 @@ const AddAccounts = () => {
       });
 
       setTimeout(() => {
-        router.push("/verify-now");
+        router.push("/verify-account");
       }, 2000);
 
       setFormData({ bankName: "", bankUsername: "", bankPassword: "" });
