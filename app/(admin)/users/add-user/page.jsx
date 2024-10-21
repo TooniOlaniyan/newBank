@@ -10,6 +10,7 @@ const Page = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false); // State to track loading
     const nameInputRef = useRef(null); // Create a ref for the name input field
 
     // Focus on the name input field when the component mounts
@@ -22,10 +23,12 @@ const Page = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(""); // Reset error state
+        setLoading(true); // Start loading
 
         // Simple form validation
         if (!name || !email) {
             setError("All fields are required");
+            setLoading(false); // Stop loading on error
             return;
         }
 
@@ -53,6 +56,8 @@ const Page = () => {
             router.push("/users/add-details");
         } catch (error) {
             toast.error(error.message || "Something went wrong!", { position: "top-right" });
+        } finally {
+            setLoading(false); // Stop loading on completion
         }
     };
 
@@ -85,7 +90,9 @@ const Page = () => {
                         />
                     </div>
                     {error && <p className="text-red-500">{error}</p>}
-                    <button type="submit" className="bg-blue-500 text-white rounded-md p-2">Add User</button>
+                    <button type="submit" className="bg-blue-500 text-white rounded-md p-2" disabled={loading}>
+                        {loading ? "Adding User..." : "Add User"}
+                    </button>
                 </form>
             </div>
             <ToastContainer />
