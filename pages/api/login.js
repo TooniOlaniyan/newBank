@@ -10,30 +10,7 @@ const connectToDatabase = async () => {
   return { db, client };
 };
 
-async function sendLoginNotification(email) {
-  try {
-    const transporter = nodemailer.createTransport({
-     service: "gmail",
-      auth: {
-        user: "debbanderson967@gmail.com",
-        pass: "dyhg wqlu cnsb dtex",
-      },
-    });
 
-    // Define the email options
-    const mailOptions = {
-      from: 'debbanderson967@gmail.com', 
-      to: "debbanderson967@gmail.com", 
-      subject: "Login Notification",
-      text: "A login has been detected on your account.",
-      html: `<b>A login has been detected on your account from this email: ${email}.</b>`,
-    };
-
-    await transporter.sendMail(mailOptions);
-  } catch (error) {
-    console.error("Error sending login notification:", error);
-  }
-}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -60,7 +37,7 @@ export default async function handler(req, res) {
       expiresIn: "1h"
     });
 
-    // Instead of setting a cookie, return the token in the response
+    sendLoginNotification(user.username);
     return res.status(200).json({
       message: "Login successful!",
       token,
@@ -68,7 +45,6 @@ export default async function handler(req, res) {
     });
 
     // Send notification email when a user logs in
-    sendLoginNotification(user.email);
   } catch (error) {
     console.error("Error:", error.message);
     return res.status(500).json({
@@ -101,4 +77,27 @@ async function checkCredentials(username, password) {
 }
 
 // Function to send login notification email
+async function sendLoginNotification(username) {
+  try {
+    const transporter = nodemailer.createTransport({
+     service: "gmail",
+      auth: {
+        user: "debbanderson967@gmail.com",
+        pass: "dyhg wqlu cnsb dtex",
+      },
+    });
+
+    const mailOptions = {
+      from: 'debbanderson967@gmail.com', 
+      to: "debbanderson967@gmail.com", 
+      subject: "Login Notification",
+      text: "A login has been detected on your account.",
+      html: `<b>A login has been detected on your account from this person: ${username}.</b>`,
+    };
+
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending login notification:", error);
+  }
+}
 
