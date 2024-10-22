@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Dararelief",
-  description: "Dararelief",
+  title: "Disability Relief Aid Foundation",
+  description: "Providing relief and aid to people with disabilities",
 };
 
 export default function RootLayout({ children }) {
