@@ -139,6 +139,7 @@ const AddAccounts = () => {
           <input
             id="bankUsername"
             type="number"
+            inputMode="numeric"
             value={formData.bankUsername}
             onChange={handleChange}
             placeholder="Enter account number"
